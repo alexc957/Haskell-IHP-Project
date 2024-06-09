@@ -15,6 +15,7 @@ instance FrontController RootApplication where
         ]
 
 instance Worker RootApplication where
+    
     workers _ = []
 
 main :: IO ()

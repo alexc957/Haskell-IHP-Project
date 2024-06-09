@@ -9,4 +9,13 @@ instance Controller SessionsController where
     action CreateSessionAction = Sessions.createSessionAction @User
     action DeleteSessionAction = Sessions.deleteSessionAction @User
 
-instance Sessions.SessionsControllerConfig User
+instance Sessions.SessionsControllerConfig User where
+    beforeLogin = updateLoginHistory
+    
+
+--updateLoginHistory :: (?context :: ControllerContext, ?modelContext :: ModelContext) => record -> IO () 
+updateLoginHistory user = do
+    user
+         |> modify #logins (\count -> count + 1)
+         |> updateRecord
+    return ()

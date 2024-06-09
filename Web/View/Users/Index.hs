@@ -5,6 +5,11 @@ data IndexView = IndexView { users :: [User] }
 
 instance View IndexView where
     html IndexView { .. } = [hsx|
+        <div>
+            <a class="js-delete js-delete-no-confirm" href={DeleteSessionAction}>Logout</a>
+        </div>
+
+
         {breadcrumb}
 
         <h1>Index<a href={pathTo NewUserAction} class="btn btn-primary ms-4">+ New</a></h1>

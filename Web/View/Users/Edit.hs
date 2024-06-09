@@ -18,9 +18,9 @@ instance View EditView where
 renderForm :: User -> Html
 renderForm user = formFor user [hsx|
     {(textField #email)}
-    {(textField #username)}
-    {(textField #passwordHash)}
-    {(textField #failedLoginAttempts)}
+    {(passwordField #passwordHash) {fieldLabel = "Password"}}
+
+    {(passwordField #passwordHash) { fieldLabel = "Password confirmation", fieldName = "passwordConfirmation", validatorResult = Nothing }}
     {submitButton}
 
 |]

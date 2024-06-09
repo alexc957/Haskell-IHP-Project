@@ -5,5 +5,6 @@ CREATE TABLE users (
     username TEXT NOT NULL,
     password_hash TEXT NOT NULL,
     locked_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
-    failed_login_attempts INT DEFAULT 0 NOT NULL
+    failed_login_attempts INT DEFAULT 0 NOT NULL,
+    logins INT DEFAULT 0 NOT NULL
 );
