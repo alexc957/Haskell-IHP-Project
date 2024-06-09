@@ -11,6 +11,7 @@ import Data.String.Interpolate (i)
 
 instance Controller UsersController where
     action UsersAction = do
+        ensureIsUser
         users <- query @User |> fetch
         render IndexView { .. }
 
@@ -19,14 +20,17 @@ instance Controller UsersController where
         render NewView { .. }
 
     action ShowUserAction { userId } = do
+        ensureIsUser
         user <- fetch userId
         render ShowView { .. }
 
     action EditUserAction { userId } = do
+        ensureIsUser
         user <- fetch userId
         render EditView { .. }
 
     action UpdateUserAction { userId } = do
+        ensureIsUser
         user <- fetch userId
         
         let originalPasswordHash = user.passwordHash
@@ -88,6 +92,7 @@ instance Controller UsersController where
                     redirectToPath "/"
 
     action DeleteUserAction { userId } = do
+        ensureIsUser
         user <- fetch userId
         deleteRecord user
         setSuccessMessage "User deleted"
